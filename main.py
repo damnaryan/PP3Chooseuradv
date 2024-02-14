@@ -1,40 +1,32 @@
-print("Welcome to my computer quiz!")
+import random
 
-playing = input("Do you want to play? ")
+range_top = input("Enter the extent for the selection of the number: ")
 
-if playing.lower() != "yes":
+if range_top.isdigit():
+    range_top = int(range_top)
+    if range_top <= 0:
+        print("Please enter a number greater than 0, nest time.")
+        quit()
+else:
+    print("Please enter a valid number, next time.")
     quit()
 
-print("Okay! Let's play :)")
-score = 0
+random_num = random.randint(0, range_top)
+print(f"A random number is selected between 0 to {range_top}")
+guess_count = 0;
 
-answer = input("What does CPU stand for? ")
-if answer.lower() == "central processing unit":
-    print('Correct!')
-    score += 1
-else:
-    print("Incorrect!")
+while True:
+    user_guess = input("Enter your guess: ")
+    user_guess = int(user_guess)
+    if user_guess > random_num:
+        print("Lower!")
+        guess_count += 1
+    elif user_guess < random_num:
+        print("Higher!")
+        guess_count += 1
+    else:
+        print("You guessed it right!")
+        guess_count += 1
+        break
 
-answer = input("What does GPU stand for? ")
-if answer.lower() == "graphics processing unit":
-    print('Correct!')
-    score += 1
-else:
-    print("Incorrect!")
-
-answer = input("What does RAM stand for? ")
-if answer.lower() == "random access memory":
-    print('Correct!')
-    score += 1
-else:
-    print("Incorrect!")
-
-answer = input("What does PSU stand for? ")
-if answer.lower() == "power supply":
-    print('Correct!')
-    score += 1
-else:
-    print("Incorrect!")
-
-print("You got " + str(score) + " questions correct!")
-print("You got " + str((score / 4) * 100) + "%.")
+print(f"You took {guess_count} guesses.")
